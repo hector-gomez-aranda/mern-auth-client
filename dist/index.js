@@ -32,7 +32,7 @@ mongoose_1.default
 //import routes PENDITENTE POR CAMBIAR A TS
 const auth_1 = __importDefault(require("./routes/auth"));
 const userRoutes = require('./routes/user');
-let authRouters = new auth_1.default();
+const auth = new auth_1.default();
 //app middlewared
 app.use(morgan_1.default("dev"));
 app.use(body_parser_1.default.json());
@@ -41,7 +41,7 @@ if ((process.env.NODE_ENV = "development")) {
     app.use(cors_1.default({ origin: `http://localhost:3000` }));
 }
 // middleware PENDIENTE POR CAMBIAR A TS
-app.use("/api", authRouters.routerFun);
+app.use('/api', auth);
 app.use('/api', userRoutes);
 const server = app.listen(port, () => {
     console.log(`API is running on port ${port}`);

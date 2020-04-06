@@ -24,10 +24,10 @@ mongoose
   .catch(err => console.log("DB CONNECTION ERROR: ", err));
 
 //import routes PENDITENTE POR CAMBIAR A TS
-import authRoute from './routes/auth';
+import authRouters from './routes/auth';
 const userRoutes = require('./routes/user');
 
-let authRouters = new authRoute()
+// const auth = new authRouters()
 
 
 //app middlewared
@@ -40,7 +40,7 @@ if ((process.env.NODE_ENV = "development")) {
 }
 
 // middleware PENDIENTE POR CAMBIAR A TS
-app.use("/api", authRouters.routerFun);
+app.use('/api', authRouters);
 app.use('/api', userRoutes);
 
 

@@ -1,16 +1,8 @@
 import express from "express";
 import {auth} from '../controllers/auth';
 
+const router = express.Router();
 
-export default class authRouter {
-    router: any;
-
-    constructor(){
-        this.router = express.Router();
-    }
-
-    //pendiente este metodo ya que da error
-    routerFun(){
         let authController = new auth();
         //import validators
         const {
@@ -21,35 +13,34 @@ export default class authRouter {
         } = require("../validators/auth");
         const { runValidation } = require("../validators/index");
 
-        this.router.post(
+        router.post(
           "/signup",
           userSignupValidator,
           runValidation,
           authController.signup
         );
-        this.router.post("/account-activation", authController.accountActivation);
-        this.router.post(
+        router.post("/account-activation", authController.accountActivation);
+        router.post(
           "/signin",
           userSigninValidator,
           runValidation,
           authController.signin
         );
         //forgot reset password
-        this.router.put(
+        router.put(
           "/forgot-password",
           forgotPasswordValidator,
           runValidation,
           authController.forgotPassword
         );
-        this.router.put(
+        router.put(
           "/reset-password",
           resetPasswordValidator,
           runValidation,
           authController.resetPassword
         );
         //google and facebook
-        this.router.post("/google-login", authController.googleLogin);
-        this.router.post("/facebook-login", authController.facebookLogin);
-    }
-}
-
+        router.post("/google-login", authController.googleLogin);
+        router.post("/facebook-login", authController.facebookLogin);
+        
+        export = router;
